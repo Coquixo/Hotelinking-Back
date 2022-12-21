@@ -19,7 +19,7 @@ class Code extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function offert()
+    public function offer()
     {
         return $this->belongsTo(Offer::class);
     }
