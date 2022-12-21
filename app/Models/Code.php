@@ -9,11 +9,18 @@ class Code extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'code',
-        'ownersCode',
+        'code_UUID',
+        'offer_id',
     ];
+
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'userCode');
+        return $this->belongsTo(User::class);
+    }
+
+    public function offert()
+    {
+        return $this->belongsTo(Offer::class);
     }
 }

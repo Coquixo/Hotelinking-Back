@@ -22,6 +22,7 @@ class User extends Authenticatable
         'surname',
         'email',
         'password',
+        'code_UUID'
     ];
 
     /**
@@ -35,6 +36,6 @@ class User extends Authenticatable
 
     public function code()
     {
-        return $this->belongsToMany(Code::class, 'codeName');
+        return $this->hasMany(Code::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Code;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
@@ -23,8 +24,7 @@ class CodeControler extends Controller
             ]);
         }
     }
-    public function
-    generateCode()
+    public function generateCode()
     {
         try {
             $newUUID = Uuid::uuid4();
@@ -35,5 +35,10 @@ class CodeControler extends Controller
                 "message" => "Something went wrong on Generating a Code"
             ]);
         }
+    }
+
+    public function setCodeToUser(Request $request)
+    {
+        $user = $request('user');
     }
 }
