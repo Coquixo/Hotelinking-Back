@@ -16,7 +16,7 @@ class OfferSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('offer')->insert([
+        DB::table('offers')->insert([
             ["offer_Name" => "2x1"],
             ["offer_Name" => "5x1"],
             ["offer_Name" => "4x1"],

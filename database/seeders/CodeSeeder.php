@@ -16,7 +16,7 @@ class CodeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('code')->insert([
+        DB::table('codes')->insert([
             [
                 "code_UUID" => "843325135",
                 "offer_id" => "1"

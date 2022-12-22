@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CodeControler;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +27,12 @@ Route::post("/user/register", [AuthController::class, "register"]);
 //Logout
 Route::post("/user/logout", [AuthController::class, "logout"]);
 
+//Get all coders
+Route::get("/codes", [CodeControler::class, 'getAllCodes']);
+//Generate a code
+Route::post("/code/new", [CodeControler::class, "generateCode"]);
+//Set Code to User
+Route::put("/code/set", [CodeControler::class], "setCodeToOffer ");
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Get all offers
+Route::get("/offers", [OfferController::class, "getAllOffers"]);

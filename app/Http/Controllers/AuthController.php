@@ -29,7 +29,7 @@ class AuthController extends Controller
                 "token" => $token
             ], 201);
         } catch (\Throwable $th) {
-            response()->json([
+            return response()->json([
                 "success" => false,
                 "message" => "Something went wrong on Registration"
             ], 500);
