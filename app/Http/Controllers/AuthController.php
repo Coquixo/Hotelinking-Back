@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -18,20 +19,20 @@ class AuthController extends Controller
                 'name' => $request->get('name'),
                 'surname' => $request->get('surname'),
                 'email' => $request->get('email'),
+                'codes' => $request->get('codes'),
                 'password' => bcrypt($request->password)
             ]);
-            $token = JWTAuth::fromUser($user);
 
             return response()->json([
                 "success" => true,
                 "message" => "Successfull registration",
                 "user" => $user,
-                "token" => $token
             ], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 "success" => false,
-                "message" => "Something went wrong on Registration"
+                "message" => "Something went wrong on Registration",
+                "error" => $th
             ], 500);
         }
     }
@@ -42,23 +43,25 @@ class AuthController extends Controller
     {
         try {
             $input = $request->only('email', 'password');
-            $jwt_token = null;
-            if (!$jwt_token = JWTAuth::attempt($input)) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Invalid Email or Password',
-                ], 403);
-
+            if (Auth::attempt($input)) {
                 return response()->json([
                     'success' => true,
                     "message" => "logged in successfully",
-                    'token' => $jwt_token,
+                    "data" => $input
+                ]);
+            }
+            if (!Auth::attempt($input)) {
+                return response()->json([
+                    "success" => false,
+                    "message" => "incorrect credentials"
+
                 ]);
             }
         } catch (\Throwable $th) {
             response()->json([
                 "success" => false,
-                "message" => "Something went wrong on Registration"
+                "message" => "Something went wrong on Loggin in",
+                "error" => $th
             ], 500);
         }
     }
@@ -68,7 +71,8 @@ class AuthController extends Controller
     public function logout()
     {
         try {
-            auth()->logout();
+            Auth::logout();
+            // auth()->logout();
             return response()->json([
                 'success' => true,
                 'message' => 'User logged out successfully'
@@ -77,15 +81,11 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong on Logging Out ' . $th->getMessage()
+                'message' => 'Something went wrong on Logging Out',
+                'error' => $th
             ], 500);
         }
     }
 
     //Me
-
-    public function me()
-    {
-        return response()->json(auth()->user());;
-    }
 }

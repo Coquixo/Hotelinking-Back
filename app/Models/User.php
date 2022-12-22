@@ -22,7 +22,7 @@ class User extends Authenticatable
         'surname',
         'email',
         'password',
-        'code_UUID'
+        'codes'
     ];
 
     /**
@@ -30,6 +30,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    public $timestamps = false;
     protected $hidden = [
         'password',
     ];

@@ -12,6 +12,8 @@ class Offer extends Model
         'offerName',
     ];
 
+
+    public $timestamps = false;
     public function code()
     {
         return $this->hasMany(Code::class);

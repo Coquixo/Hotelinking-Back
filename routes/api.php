@@ -18,21 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//getAllUsers
+//getAllUsers works
 Route::get("/users", [UserController::class, "getAllUsers"]);
-//Login
+//Login works
 Route::post("/user/login", [AuthController::class, "login"]);
-//Register
+//Register works
 Route::post("/user/register", [AuthController::class, "register"]);
-//Logout
+//Logout works
 Route::post("/user/logout", [AuthController::class, "logout"]);
 
-//Get all coders
+//Get all coders works
 Route::get("/codes", [CodeControler::class, 'getAllCodes']);
-//Generate a code
+//Generate a code works
 Route::post("/code/new", [CodeControler::class, "generateCode"]);
 //Set Code to User
 Route::put("/code/set", [CodeControler::class], "setCodeToOffer ");
 
-//Get all offers
+//Get all offers  works
 Route::get("/offers", [OfferController::class, "getAllOffers"]);
