@@ -18,21 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//getAllUsers works
-Route::get("/users", [UserController::class, "getAllUsers"]);
-//Login works
-Route::post("/user/login", [AuthController::class, "login"]);
-//Register works
-Route::post("/user/register", [AuthController::class, "register"]);
-//Logout works
-Route::post("/user/logout", [AuthController::class, "logout"]);
+Route::group([
+    'middleware' => ['cors']
+], function () {
+    //getAllUsers works
+    Route::get("/users", [UserController::class, "getAllUsers"]);
+    //Login works
+    Route::post("/user/login", [AuthController::class, "login"]);
+    //Register works
+    Route::post("/user/register", [AuthController::class, "register"]);
+    //Logout works
+    Route::post("/user/logout", [AuthController::class, "logout"]);
 
-//Get all coders works
-Route::get("/codes", [CodeControler::class, 'getAllCodes']);
-//Generate a code works
-Route::post("/code/new", [CodeControler::class, "generateCode"]);
-//Set Code to User
-Route::put("/code/set", [CodeControler::class], "setCodeToOffer ");
+    //Get all coders works
+    Route::get("/codes", [CodeControler::class, 'getAllCodes']);
+    //Generate a code works
+    Route::post("/code/new", [CodeControler::class, "generateCode"]);
+    //Set Code to User
+    Route::put("/code/set", [CodeControler::class], "setCodeToOffer ");
 
-//Get all offers  works
-Route::get("/offers", [OfferController::class, "getAllOffers"]);
+    //Get all offers  works
+    Route::get("/offers", [OfferController::class, "getAllOffers"]);
+});
